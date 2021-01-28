@@ -1,0 +1,17 @@
+menuconfig LIBNETTLE
+    bool "libnettle: Symmetric and one-way cryptographic library"
+    select LIBNEWLIBC
+    select LIBUK9P if PLAT_KVM
+    select LIB9PFS if PLAT_KVM
+    select LIBVFSCORE_AUTOMOUNT_ROOTFS if PLAT_KVM
+    default y
+
+if LIBNETTLE
+    config LIBNETTLE_TEST
+    bool "Provide test suite"
+    default n
+endif
+
+choice LIBVFSCORE_ROOTFS
+    default LIBVFSCORE_ROOTFS_9PFS
+endchoice
